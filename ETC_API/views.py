@@ -15,18 +15,22 @@ class TopicViewSet(ModelViewSet):
 
 class PostViewSet(ModelViewSet):
 
-    queryset = models.Post.objects.all()
+    queryset = models.Post.objects.select_related('topic')
     serializer_class = serializers.GetPostSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
 
 class SectionViewSet(ModelViewSet):
 
-    queryset = models.Section.objects.all()
+    queryset = models.Section.objects.select_related('post').prefetch_related('content')
     serializer_class = serializers.GetSectionSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['post']
 
 class TextContentViewSet(ModelViewSet):
 
-    queryset = models.TextContent.objects.all()
+    queryset = models.TextContent.objects.select_related('section')
     serializer_class = serializers.GetTextContentSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['section']
