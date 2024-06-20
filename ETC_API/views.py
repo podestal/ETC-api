@@ -27,6 +27,12 @@ class SectionViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['post']
 
+    def get_serializer_class(self):
+
+        if self.request.method == 'POST':
+            return serializers.CreateSectionSerializer
+        return serializers.GetSectionSerializer
+
 class TextContentViewSet(ModelViewSet):
 
     queryset = models.TextContent.objects.select_related('section')
