@@ -15,16 +15,26 @@ class TopicViewSet(ModelViewSet):
 
 class PostViewSet(ModelViewSet):
 
-    queryset = models.Post.objects.select_related('topic')
-    serializer_class = serializers.GetPostSerializer
+    queryset = models.Post.objects.select_related('topic', 'created_by')
     http_method_names = ['get', 'post', 'patch', 'delete']
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created_at']
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return serializers.CreatePostSerializer
+        return serializers.GetPostSerializer
+    
+    def get_serializer_context(self):
+        return {'user': self.request.user}
 
 class SectionViewSet(ModelViewSet):
 
     queryset = models.Section.objects.select_related('post').prefetch_related('content')
     serializer_class = serializers.GetSectionSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ['created_at']
     filterset_fields = ['post']
 
     def get_serializer_class(self):
@@ -38,5 +48,6 @@ class TextContentViewSet(ModelViewSet):
     queryset = models.TextContent.objects.select_related('section')
     serializer_class = serializers.GetTextContentSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ['created_at']
     filterset_fields = ['section']
