@@ -13,22 +13,26 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2sm7$p-!*bv^+ya_1f4hkn4js4dx4i6dl-*t56wmas-fv#%3)*'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.verce.app']
 
 
 # Application definition
@@ -89,11 +93,11 @@ WSGI_APPLICATION = 'ETC.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ets',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '13angulo'
+        'ENGINE': os.environ.get('DB_TEST_ENGINE'),
+        'NAME': os.environ.get('DB_TEST_NAME'),
+        'HOST': os.environ.get('DB_TEST_HOST'),
+        'USER': os.environ.get('DB_TEST_USER'),
+        'PASSWORD': os.environ.get('DB_TEST_PASSWORD')
     }
 }
 

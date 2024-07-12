@@ -32,7 +32,7 @@ class GetSimpleTextContentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.TextContent
-        fields = ['id',  'content']
+        fields = ['id',  'content', 'content_type', 'language']
 
 
 class GetSectionSerializer(serializers.ModelSerializer):

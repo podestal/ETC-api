@@ -44,8 +44,18 @@ class TextContent(models.Model):
         (TYPE_IMG, 'Img'),
     ]
 
+    TYPE_JAVASCRIPT = 'javascript'
+    TYPE_PYTHON = 'python'
+
+
+    LANGUAGE_CHOICES = [
+        (TYPE_JAVASCRIPT, 'JavaScript'),
+        (TYPE_PYTHON, 'Python')
+    ]
+
     content = models.TextField()
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='content')
     created_at = models.DateTimeField(auto_now_add=True)
-    content_type = models.CharField(max_length=1, default='T')
+    content_type = models.CharField(max_length=1, default='T', choices=TYPE_CHOICES)
+    language = models.CharField(max_length=255, null=True, blank=True, choices=LANGUAGE_CHOICES)
 
