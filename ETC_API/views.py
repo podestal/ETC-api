@@ -6,6 +6,7 @@ from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from . import models
 from . import serializers
+from . import permissions
 
 class TopicViewSet(ModelViewSet):
 
@@ -19,6 +20,7 @@ class PostViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
     filter_backends = [OrderingFilter]
     ordering_fields = ['created_at']
+    permission_classes = [permissions.IsStaffOrReadOnly]
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
@@ -36,6 +38,7 @@ class SectionViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     ordering_fields = ['created_at']
     filterset_fields = ['post']
+    permission_classes = [permissions.IsStaffOrReadOnly]
 
     def get_serializer_class(self):
 
@@ -51,3 +54,4 @@ class TextContentViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     ordering_fields = ['created_at']
     filterset_fields = ['section']
+    permission_classes = [permissions.IsStaffOrReadOnly]

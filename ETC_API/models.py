@@ -34,7 +34,18 @@ class Section(models.Model):
 
 class TextContent(models.Model):
 
+    TYPE_TEXT = 'T'
+    TYPE_CODE = 'C'
+    TYPE_IMG = 'I'
+
+    TYPE_CHOICES = [
+        (TYPE_TEXT, 'Text'),
+        (TYPE_CODE, 'Code'),
+        (TYPE_IMG, 'Img'),
+    ]
+
     content = models.TextField()
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='content')
     created_at = models.DateTimeField(auto_now_add=True)
+    content_type = models.CharField(max_length=1, default='T')
 

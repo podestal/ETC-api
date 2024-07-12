@@ -41,13 +41,13 @@ class GetSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Section
-        fields = ['id', 'title', 'post', 'content']
+        fields = ['id', 'title', 'post', 'content', 'created_at']
 
 class CreateSectionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Section
-        fields = ['id', 'title', 'post']
+        fields = ['id', 'title', 'post', 'created_at']
 
 class GetTextContentSerializer(serializers.ModelSerializer):
 
