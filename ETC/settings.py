@@ -11,14 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from pathlib import Path
 from datetime import timedelta
-from dotenv import load_dotenv
-import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'etc-5fhq7icem-luis-rodriguezs-projects-4856b3ea.vercel.app', '.vercel.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'etc-5fhq7icem-luis-rodriguezs-projects-4856b3ea.vercel.app', 'etc-api-ruby.vercel.app', '.vercel.app']
 
 
 # Application definition
@@ -93,11 +93,11 @@ WSGI_APPLICATION = 'ETC.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_TEST_ENGINE'),
-        'NAME': os.environ.get('DB_TEST_NAME'),
-        'HOST': os.environ.get('DB_TEST_HOST'),
-        'USER': os.environ.get('DB_TEST_USER'),
-        'PASSWORD': os.environ.get('DB_TEST_PASSWORD')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_DEV_NAME'),
+        'HOST': os.environ.get('DB_DEV_HOST'),
+        'USER': os.environ.get('DB_DEV_USER'),
+        'PASSWORD': os.environ.get('DB_DEV_PASSWORD')
     }
 }
 
@@ -183,3 +183,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
