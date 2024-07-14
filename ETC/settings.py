@@ -94,10 +94,10 @@ WSGI_APPLICATION = 'ETC.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_DEV_NAME'),
-        'HOST': os.environ.get('DB_DEV_HOST'),
-        'USER': os.environ.get('DB_DEV_USER'),
-        'PASSWORD': os.environ.get('DB_DEV_PASSWORD')
+        'NAME': 'etc',
+        'HOST': 'etc.cxai828s6j8h.us-east-1.rds.amazonaws.com',
+        'USER': 'podestal',
+        'PASSWORD': '13anguloX'
     }
 }
 

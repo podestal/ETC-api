@@ -26,6 +26,12 @@ class CreatePostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['user']
         return models.Post.objects.create(created_by=user, **validated_data)
+    
+class UpdatePostSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = models.Post
+        fields = ['id', 'title', 'topic', 'created_at', 'description', 'img_url']
 
 
 class GetSimpleTextContentSerializer(serializers.ModelSerializer):
