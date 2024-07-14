@@ -151,6 +151,8 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://tranquil-malabi-e16a74.netlify.app",
+    "https://eltecladodesocrates.com",
 ]
 
 REST_FRAMEWORK = {
