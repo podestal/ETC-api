@@ -13,6 +13,7 @@ class TopicViewSet(ModelViewSet):
     queryset = models.Topic.objects.all()
     serializer_class = serializers.GetTopicSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']
+    permission_classes = [permissions.IsStaffOrReadOnly]
 
 class PostViewSet(ModelViewSet):
 
