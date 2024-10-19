@@ -14,7 +14,7 @@ DATABASES = {
     }
 }
 
-# CORS_ALLOWED_ORIGINS = []
-# CORS_ALLOWED_ORIGINS.extend(
-#     filter(None, os.environ.get("DJANGO_CORS_ALLOWED_ORIGINS", "").split(","))
-# )
+CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS.extend(
+    filter(None, os.environ.get("DJANGO_CORS_ALLOWED_ORIGINS", "").split(","))
+)
